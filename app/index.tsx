@@ -1,21 +1,21 @@
 //index -- parte da mensagem esta errado
-import { Button, ButtonText } from '@/components/ui/button';
-import { Input, InputField } from '@/components/ui/input';
-import api from '@/helpers/axios';
-import { router } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Button, ButtonText } from '@/components/ui/button'
+import { Input, InputField } from '@/components/ui/input'
+import { router } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
+import { useState } from 'react'
+import { Text, View, StyleSheet } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { API_URL } from './config/constants'
 
 interface IUserLogin{
     email: string
-    password: string
+    senha: string
 }
 
 export default function Login() {
-    const [user, setUser] = useState<IUserLogin>({email: '', password: ''})
-    let [errLogin, setErrLogin] = useState<string>("")
+    const [user, setUser] = useState<IUserLogin>({email: '', senha: ''})
+    const [errLogin, setErrLogin] = useState<string>("")
 
     const cadastrar = () => {
         router.replace('/cadastro')
@@ -27,24 +27,23 @@ export default function Login() {
 
     const login = async() => {
         try{
-            const resp = await fetch('http://localhost:3000/auth/login',{
+            const resp = await fetch(`${API_URL}/auth/login`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
-        }) 
-        console.log(resp)
+            body: JSON.stringify({email: user.email, senha: user.senha}),
+        })
         
         if(resp.status == 200){
 
-          const data = resp.json()
-          console.log(data.token)
+          const data = await resp.json()
+          console.log(data)
 
           await AsyncStorage.setItem('login', 'true')
           await AsyncStorage.setItem('token', data.token)
 
-          router.replace('/profile')
+          router.replace('intern/profile')
 
         } else setErrLogin("Usuário não encontrado")
 
@@ -65,7 +64,7 @@ export default function Login() {
             </Input>
 
             <Input variant='outline' size='lg' style={styles.input}> 
-                <InputField onChangeText={(txt) => setUser({...user, password: txt})} 
+                <InputField onChangeText={(txt) => setUser({...user, senha: txt})} 
                 placeholder='Senha' type='password'/>
             </Input>
             <Text style={{marginBottom: 25, color: "red"}}> {errLogin} </Text>
@@ -117,4 +116,4 @@ const styles = StyleSheet.create({
         width: 120,
         height: 40,
     }
-}); 
+})
