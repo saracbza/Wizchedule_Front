@@ -9,11 +9,11 @@ import React from 'react'
 export default function Layout(){
     return(
         <GluestackUIProvider>
-            <NavigationContainer>
+           {/* <NavigationContainer> */}
                 <Header />
                 <Slot />
                 <FooterMenu />
-            </NavigationContainer>
+          {/*  </NavigationContainer>*/}
         </GluestackUIProvider>
     )
 }
