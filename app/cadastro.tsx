@@ -126,7 +126,7 @@ export default function Cadastro(){
             </View>
             </Modal>
 
-            <Button style={{marginTop: 8, width: 330, 
+            <Button style={{marginTop: 8, width: 330, backgroundColor: '#fff',
                 height: 40, justifyContent: 'flex-start'}} 
                 onPress={()=> setModalVisible(true)}
                 size="md" variant="outline" action="primary">
@@ -139,12 +139,14 @@ export default function Cadastro(){
 
             <View style={styles.buttonsView}>
 
-                <Button style={[styles.button, {marginRight: 10}]} onPress={cancelar}
+                <Button style={[styles.button, {marginRight: 10, backgroundColor: '#cf1111'}]} 
+                onPress={cancelar}
                     size="md" variant="solid" action="primary">
                     <ButtonText>Cancelar</ButtonText>
                 </Button >
 
-                <Button style={styles.button} onPress={cadastrar}
+                <Button style={[styles.button, {backgroundColor: '#234e5e'}]} 
+                onPress={cadastrar}
                     size="md" variant="solid" action="primary">
                     <ButtonText>Cadastrar</ButtonText>
                 </Button>
@@ -169,7 +171,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#1a2224',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 16
@@ -182,6 +184,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         marginTop: 8,
         paddingHorizontal: 8,
+        backgroundColor: '#fff'
       },
     title: {
         fontSize: 25, 

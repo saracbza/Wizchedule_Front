@@ -2,10 +2,10 @@ import { Button, ButtonText } from '@/components/ui/button'
 import { router } from 'expo-router'
 import { Text, StyleSheet, SafeAreaView } from 'react-native'
 
-export default function Home(){
+export default function Agendamentos(){
 
     const voltar = () => {
-        router.replace('/login')
+        router.replace('/home')
     }
 
     return(
