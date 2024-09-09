@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { API_URL } from './config/constants'
+import { pegarDadosTopo } from './services/api'
 
 interface IUserLogin{
     email: string
@@ -36,14 +37,17 @@ export default function Login() {
         })
         
         if(resp.status == 200){
-
+          const hoje = new Date().toString()
           const data = await resp.json()
           console.log(data)
 
           await AsyncStorage.setItem('login', 'true')
           await AsyncStorage.setItem('token', data.token)
+          await AsyncStorage.setItem('hoje', hoje)
+          await pegarDadosTopo()
 
-          router.replace('intern/profile')
+          if (data.tipo == 'Aluno') router.replace('internA/home')
+          else router.replace('internM/home')
 
         } else setErrLogin("Usuário não encontrado")
 
