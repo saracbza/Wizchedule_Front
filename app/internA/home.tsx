@@ -10,7 +10,7 @@ export default function Home(){
 
     return(
         <SafeAreaView style={styles.container}>
-            <Text> Olá Aluno! </Text>
+            <Text style={{color: '#fff'}}> Olá Aluno! </Text>
 
             <Button style={{ marginTop: 5 }} onPress={voltar}
             size="md" variant="solid" action="primary">
