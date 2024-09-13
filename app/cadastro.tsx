@@ -104,7 +104,7 @@ export default function Cadastro(){
                     
                     <Button style={styles.modalButton}
                     onPress={() => modal("Desenvolvimento de Software Multiplataforma")}>
-                        <ButtonText> Desenvolvimento de Software Multiplataforma </ButtonText>
+                        <ButtonText style={{fontSize: 13}}> Desenvolvimento de Software Multiplataforma </ButtonText>
                     </Button>
 
                     <Button style={styles.modalButton}
@@ -219,5 +219,6 @@ const styles = StyleSheet.create({
         width: 330,
         height: 40,
         marginTop: 10,
-    }
+        backgroundColor: '#265161'
+    },
 })

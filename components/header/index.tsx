@@ -1,18 +1,34 @@
 import { useEffect, useState } from 'react'
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet, Image, ImageSourcePropType } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import logoCromo from '../../assets/cromo.png'
+import foto1 from '../../assets/perfil/1.png'
+import foto2 from '../../assets/perfil/2.png'
+import foto3 from '../../assets/perfil/3.png'
+import foto4 from '../../assets/perfil/4.png'
+import foto5 from '../../assets/perfil/5.png'
 
 export default function Header(){
 
-    const [nome, setNome] = useState('');
-    const [curso, setCurso] = useState('');
-    const [data, setData] = useState('');
+    const [nome, setNome] = useState('')
+    const [curso, setCurso] = useState('')
+    const [data, setData] = useState('')
+    const [fotoPerfil, setFotoPerfil] = useState<ImageSourcePropType>()
 
     useEffect(() => {
         const buscarDados = async () => {
             try {
                 const nomeUsuario = await AsyncStorage.getItem('nomeUsuario')
                 const cursoUsuario = await AsyncStorage.getItem('cursoUsuario')
+                const fotoId = await AsyncStorage.getItem('foto')
+                console.log(fotoId)
+                switch (fotoId){
+                    case '1': setFotoPerfil(foto1)
+                    case '2': setFotoPerfil(foto2)
+                    case '3': setFotoPerfil(foto3)
+                    case '4': setFotoPerfil(foto4)
+                    case '5': setFotoPerfil(foto5)
+                }
                 if (!(!nomeUsuario)) setNome(nomeUsuario)
                 if (!(!cursoUsuario)) setCurso(cursoUsuario)
             }catch (e) { 
@@ -39,7 +55,7 @@ export default function Header(){
         <View style={styles.header}>
             <View style={styles.profileContainer}>
                 <Image
-                    source={{ uri: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fprofile-icon&psig=AOvVaw02UdG5QxvCBKtANU8n3P9D&ust=1725813223011000&source=images&cd=vfe&opi=89978449&ved=0CA8QjRxqFwoTCPDoqrKhsYgDFQAAAAAdAAAAABAE' }}
+                    source={fotoPerfil}
                     style={styles.profileImagem}
                 />
                 <View style={styles.infos}>
@@ -49,8 +65,9 @@ export default function Header(){
             </View>
             <View style={styles.rightContainer}>
                 <Image
-                    source={{ uri: '../../assets/cromo' }} 
+                    source={logoCromo} 
                     style={styles.logo}
+                    //resizeMode="contain"
                 />
                 <Text style={styles.text}>{data}</Text>
             </View>
@@ -65,7 +82,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: 'white', 
+        backgroundColor: '#fff', 
         borderBottomWidth: 1,
         borderBottomColor: '#fff',
     },
@@ -74,13 +91,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     profileImagem: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        marginRight: 16,
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        marginRight: 10,
     },
     infos: {
         justifyContent: 'center',
+        marginLeft: 0,
     },
     nome: {
         fontWeight: 'bold',
@@ -88,15 +106,15 @@ const styles = StyleSheet.create({
         color: '#34535c'
     },
     text: {
-        fontSize: 14,
+        fontSize: 12,
         color: '#63797b',
     },
     rightContainer: {
         alignItems: 'center',
     },
     logo: {
-        width: 50,
-        height: 50,
+        width: 70,
+        height: 22,
         marginBottom: 8,
     },
 })
