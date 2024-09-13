@@ -1,5 +1,4 @@
-import { View, StyleSheet, Text, TextStyle, ScrollView } from "react-native"
-import { Button } from "../ui/button"
+import { View, StyleSheet, Text, ScrollView } from "react-native"
 
 interface Props {
     materia: string

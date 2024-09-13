@@ -6,7 +6,6 @@ import foto1 from '../../assets/perfil/1.png'
 import foto2 from '../../assets/perfil/2.png'
 import foto3 from '../../assets/perfil/3.png'
 import foto4 from '../../assets/perfil/4.png'
-import foto5 from '../../assets/perfil/5.png'
 
 export default function Header(){
 
@@ -22,12 +21,15 @@ export default function Header(){
                 const cursoUsuario = await AsyncStorage.getItem('cursoUsuario')
                 const fotoId = await AsyncStorage.getItem('foto')
                 console.log(fotoId)
-                switch (fotoId){
-                    case '1': setFotoPerfil(foto1)
-                    case '2': setFotoPerfil(foto2)
-                    case '3': setFotoPerfil(foto3)
-                    case '4': setFotoPerfil(foto4)
-                    case '5': setFotoPerfil(foto5)
+                switch (fotoId) {
+                    case '1':
+                      setFotoPerfil(foto1); break
+                    case '2':
+                      setFotoPerfil(foto2); break
+                    case '3':
+                      setFotoPerfil(foto3); break
+                    case '4':
+                      setFotoPerfil(foto4); break
                 }
                 if (!(!nomeUsuario)) setNome(nomeUsuario)
                 if (!(!cursoUsuario)) setCurso(cursoUsuario)
